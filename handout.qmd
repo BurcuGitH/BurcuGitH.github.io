@@ -45,6 +45,7 @@ bibliography: literatur.bib
 
 reference-location: document
 number-sections: true
+
 ---
 
 # Introduction
@@ -130,7 +131,7 @@ Cluster interpretation is central to generating managerial value. The following 
 
 **Exercise :**
 
-**Objective :** To learn how to perform *K*-Means Clustering in R using retail data (Carseats dataset), evaluate the optimal number of clusters, visualize the results, and interpret cluster outcomes in a store performance segmentation context.
+**Objective : **To learn how to perform *K*-Means Clustering in R using retail data (Carseats dataset), evaluate the optimal number of clusters, visualize the results, and interpret cluster outcomes in a store performance segmentation context.
 
 **Task 1 Load the Dataset**
 
@@ -159,12 +160,13 @@ fviz_nbclust(df_scaled, kmeans, method = "wss")
 fviz_nbclust(df_scaled, kmeans, method = "silhouette")
 
 ```
-
 ::: {#fig-logo1}
 ![](graphics.png){width="100%"}
 :::
-
-WSS decreases very rapidly from k=1 to k=3. After 3, the rate of decrease slows down significantly.This indicates that 3 clusters represent a good equilibrium point. Silhouette scores reach their highest value for k=2, but scores between k=3 and k=7 are also very close to each other and at an acceptable level.2 provides clearer differentiation, while 3 provides segmentation that offers greater insight. In terms of business decisions, three clusters make the most sense: both supported by Elbow and better reflect store diversity.
+ 
+WSS decreases very rapidly from k=1 to k=3. After 3, the rate of decrease slows down significantly.This indicates that 3 clusters represent a good equilibrium point.
+Silhouette scores reach their highest value for k=2, but scores between k=3 and k=7 are also very close to each other and at an acceptable level.2 provides clearer differentiation, while 3 provides segmentation that offers greater insight.
+In terms of business decisions, three clusters make the most sense: both supported by Elbow and better reflect store diversity.
 
 **Task 3 Run *K*-Means with *k* = 3**
 
@@ -177,8 +179,7 @@ k3 <- kmeans(df_scaled, centers = 3, nstart = 25)
 k3$size       # cluster sizes
 k3$centers    # cluster profiles
 ```
-
-Cluster 1: 129 shops, Cluster 2: 115 shops,Cluster 3: 156 shops ➝ Segments are of balanced size.
+Cluster 1: 129 shops, Cluster 2: 115 shops,Cluster 3: 156 shops ➝ Segments are of balanced size. 
 
 **Task 4 Compare with *k* = 4 and Silhouette Scores**
 
@@ -202,15 +203,13 @@ The average silhouette score is 0.1717 for *k* = 3 and 0.1750 for *k* = 4. This 
 **Task 5 Visualize the Clusters**
 
 Visually examine how stores are segmented according to selected variables.
-
 ```{r, eval=FALSE, echo=TRUE}
 fviz_cluster(k3, data = df_scaled)
 ```
-
 ::: {#fig-logo2}
 ![](visualise.png){width="95%"}
 :::
-
+  
 The graphic proves that the segments are truly distinct from one another,meaning that store segmentation is meaningful from a business perspective. Through this analysis, sales growth and resource efficiency can be achieved by developing different marketing and investment strategies tailored to the needs of each store.
 
 # Managerial Significance of Cluster-Based Segmentation
