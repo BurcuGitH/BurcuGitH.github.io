@@ -173,12 +173,46 @@ fviz_nbclust(df_scaled, kmeans, method = "wss") # Elbow
 fviz_nbclust(df_scaled, kmeans, method = "silhouette") # Silhouette
 ```
 
-<div>
+```{r}
+#| label: prep-step3
+#| echo: false
+#| include: false
 
-![](graphics.png){width="100%"}
+library(ISLR)
+library(tidyverse)
+library(factoextra)
 
-</div>
+data("Carseats")
+df <- Carseats
 
+df_scaled <- scale(df[, c("Sales", "CompPrice", "Income", "Advertising",
+"Population")])
+```
+::: {.columns}
+
+::: {.column}
+```{r}
+#| echo: false
+#| fig-cap: "Elbow Plot"
+#| fig-width: 5
+#| fig-height: 4
+
+fviz_nbclust(df_scaled, kmeans, method = "wss")
+```
+:::
+
+::: {.column}
+```{r}
+#| echo: false
+#| fig-cap: "Silhouette Score"
+#| fig-width: 5
+#| fig-height: 4
+
+fviz_nbclust(df_scaled, kmeans, method = "silhouette")
+```
+:::
+
+:::
 ------------------------------------------------------------------------
 
 ### Step 4 — Run K-Means with *k* = 3
@@ -222,11 +256,39 @@ Visually examine how stores are segmented according to selected variables.
 fviz_cluster(k3, data = df_scaled)
 ```
 
-<div>
 
-![](visualise.png){width="90%"}
+```{r}
+#| label: prep-cluster
+#| echo: false
+#| include: false
 
-</div>
+library(ISLR)
+library(tidyverse)
+library(factoextra)
+
+data("Carseats")
+df <- Carseats
+
+df_scaled <- scale(df[, c("Sales", "CompPrice", "Income", "Advertising",
+"Population")])
+
+set.seed(123)
+k3 <- kmeans(df_scaled, centers = 3, nstart = 25)
+```
+
+```{r}
+#| echo: false
+#| fig-width: 13
+#| fig-height: 6
+
+fviz_cluster(
+k3, data = df_scaled,
+geom = "text",
+show.clust.cent = TRUE,
+ggtheme = theme_minimal()
+)
+```
+
 
 ------------------------------------------------------------------------
 
